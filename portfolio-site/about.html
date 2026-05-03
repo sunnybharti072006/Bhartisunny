@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>~&gt; whoami :: Sunny Bharti</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --fg: #d4d4d4;
+      --fg-dim: #6b6b6b;
+      --border: #1e1e1e;
+      --green: #4ec994;
+      --link: #7a7a7a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      line-height: 1.75;
+    }
+
+    /* ── NAV ── */
+    nav {
+      margin-bottom: 3rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem 1.4rem;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: var(--fg-dim);
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--fg);
+      text-decoration: underline;
+    }
+
+    .nav-brand {
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .nav-brand:hover {
+      color: var(--green);
+    }
+
+    .nav-brand .prefix {
+      color: var(--green);
+    }
+
+    .nav-brand .cursor {
+      display: inline-block;
+      width: 7px;
+      height: 14px;
+      background: #e74c3c;
+      margin-left: 1px;
+      vertical-align: text-bottom;
+      animation: cursor-blink 1s step-end infinite;
+    }
+
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--fg);
+      margin-bottom: 2rem;
+    }
+
+    h1 .prefix {
+      color: var(--green);
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--fg);
+      font-size: 14px;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: var(--fg);
+    }
+
+    strong {
+      color: var(--fg);
+      font-weight: bold;
+    }
+
+    code {
+      background: #1a1a1a;
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 13px;
+      color: var(--fg-dim);
+    }
+
+    em {
+      font-style: italic;
+      color: var(--fg-dim);
+    }
+
+    ul {
+      margin: 1rem 0 1.5rem 1.2rem;
+      list-style: disc;
+    }
+
+    li {
+      margin-bottom: 0.8rem;
+      font-size: 14px;
+      color: var(--fg);
+    }
+
+    li strong a {
+      color: var(--fg);
+      font-weight: bold;
+    }
+
+    li strong a:hover {
+      color: var(--green);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      font-size: 12px;
+      color: #3a3a3a;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    footer a {
+      color: #555;
+    }
+
+    footer a:hover {
+      color: var(--fg-dim);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="index.html" class="nav-brand"><span class="prefix">~&gt;</span> sunnybharti<span class="cursor"></span></a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://github.com/sunnybharti072006" target="_blank">GitHub</a></li>
+      <li><a href="https://leetcode.com/u/sunnykumar_07/" target="_blank">LeetCode</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+    <h1><span class="prefix">~&gt;</span> whoami</h1>
+
+    <p>I'm Sunny, a backend developer, you may know me as sunnybharti072006 on most social media platforms.</p>
+
+    <p>I primarily do <strong>backend development with Java and Spring Boot</strong>. In my opinion, a well-designed
+      backend is like the engine of a car — the user never sees it, but everything depends on it running smoothly. The
+      same concept applies here. You choose what you want for your architecture which makes it scalable and
+      maintainable. I learn something new when I experiment with my projects.</p>
+
+    <p>I often build RESTful APIs, microservices, and server-side systems. I do it so I do not have to depend on others
+      to build a complete product.</p>
+
+    <p>I follow SOLID principles, write clean code, and believe in test-driven development. I use
+      <code>IntelliJ IDEA</code> as my primary IDE because productivity matters. I manage my builds with
+      <code>Maven</code> and <code>Gradle</code>, containerize with <code>Docker</code>, and version everything on
+      <code>Git</code>.
+    </p>
+
+    <p>I work with databases like MySQL, PostgreSQL, and MongoDB. For caching, I use Redis. I'm comfortable with Spring
+      Security, Spring Data JPA, Hibernate, and Spring Cloud for distributed systems.</p>
+
+    <p>I can code in Java, write some amount of Python, C/C++, and build things with JavaScript.</p>
+
+    <p>I use <code>IntelliJ IDEA</code> as my main editor. I also use it for various other reasons as its very
+      extensive. I won't hate you if you're a VS Code user btw.</p>
+
+    <p>I use github for my projects and open source contributions. You can check out my work on my <a
+        href="https://github.com/sunnybharti072006" target="_blank">github</a> profile.</p>
+
+    <p>I'm PM friendly on any platform unless if you're gonna ask skid questions or gonna spam my inbox with logs. If
+      you have any important queries to ask me, feel free to reach out via my <a
+        href="mailto:sunnybharti072006@gmail.com">email</a> or connect on <a href="https://linkedin.com/in/sunnybharti"
+        target="_blank">LinkedIn</a> instead of just sending a <em>hi</em>.</p>
+
+    <p>Some of the stuff I've done lately(projects/teams/contributions):</p>
+
+    <ul>
+      <li>Developer of <strong><a href="https://github.com/sunnybharti072006/Watcher-chrome-extention"
+            target="_blank">Watcher Extension</a></strong>, A Chrome extension for monitoring web content changes with
+        real-time notifications.</li>
+      <li>Developer of <strong>E-Commerce REST API</strong>, A fully functional e-commerce backend with Spring Boot, JWT
+        authentication, role-based access, and payment gateway integration.</li>
+      <li>Developer of <strong><a href="#">SimpleLang Interpreter</a></strong>, A custom programming language
+        interpreter built in Python with full OOP support, inheritance, and polymorphism.</li>
+      <li>Developer of <strong>AI Pipeline System</strong>, Multi-model AI pipeline with BART summarizer, MiniLM scorer,
+        and FLAN-T5 action advisor, optimized for GPU acceleration.</li>
+      <li>Developer of <strong>URL Shortener Microservice</strong>, High-performance URL shortener with Redis caching,
+        rate limiting, and analytics built on Spring Boot.</li>
+      <li>Developer of <strong>Chat App Backend</strong>, Real-time chat backend using WebSockets, Spring Boot, MongoDB,
+        and RabbitMQ for message queuing.</li>
+      <li>and many more where you can check in my <a href="https://github.com/sunnybharti072006"
+          target="_blank">github</a> repositories and you can see the progress of whatever I do on my <a
+          href="https://linkedin.com/in/sunnybharti" target="_blank">LinkedIn</a>.</li>
+    </ul>
+
+    <p>Atm, I'm working on building production-ready backend systems, contributing to open source, finishing up college
+      assignments and enjoying along the way.</p>
+
+    <footer>
+      © 2025 &bull; <a href="index.html">Sunny Bharti</a> &bull; Inspired by <a href="https://cyberknight777.dev"
+        target="_blank">cyberknight777</a> and <a href="https://nathanchance.dev" target="_blank">nathanchance</a><br>
+      Built with HTML &bull; Theme inspired by <a href="https://github.com/rhazdon" target="_blank">Djordje Atlialp</a>
+    </footer>
+  </div>
+
+</body>
+
+</html>
