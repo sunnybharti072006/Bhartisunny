@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>~&gt; devices :: Sunny Bharti</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --fg: #d4d4d4;
+      --fg-dim: #6b6b6b;
+      --border: #1e1e1e;
+      --green: #4ec994;
+      --link: #7a7a7a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      line-height: 1.75;
+    }
+
+    nav {
+      margin-bottom: 3rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem 1.4rem;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: var(--fg-dim);
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--fg);
+      text-decoration: underline;
+    }
+
+    .nav-brand {
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .nav-brand:hover {
+      color: var(--green);
+    }
+
+    .nav-brand .prefix {
+      color: var(--green);
+    }
+
+    .nav-brand .cursor {
+      display: inline-block;
+      width: 7px;
+      height: 14px;
+      background: #e74c3c;
+      margin-left: 1px;
+      vertical-align: text-bottom;
+      animation: cursor-blink 1s step-end infinite;
+    }
+
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 .prefix {
+      color: var(--green);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--fg-dim);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── DEVICE CARDS ── */
+    .device-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1.2rem;
+      background: #121212;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .device-card:hover {
+      border-color: #2a2a2a;
+      transform: translateY(-2px);
+    }
+
+    .device-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--green);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .device-card:hover::before {
+      opacity: 1;
+    }
+
+    .device-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .device-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+
+    .device-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .device-icon.laptop {
+      background: rgba(78, 201, 148, 0.08);
+      color: var(--green);
+    }
+
+    .device-icon.desktop {
+      background: rgba(230, 126, 34, 0.08);
+      color: #e67e22;
+    }
+
+    .device-icon.phone {
+      background: rgba(52, 152, 219, 0.08);
+      color: #3498db;
+    }
+
+    .device-icon.phone-alt {
+      background: rgba(155, 89, 182, 0.08);
+      color: #9b59b6;
+    }
+
+    .device-name {
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--fg);
+    }
+
+    .device-type {
+      font-size: 11px;
+      color: var(--fg-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .device-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1.5rem;
+    }
+
+    .spec {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: 13px;
+    }
+
+    .spec-label {
+      color: var(--fg-dim);
+      min-width: fit-content;
+      white-space: nowrap;
+    }
+
+    .spec-value {
+      color: var(--fg);
+    }
+
+    .spec-value.highlight {
+      color: var(--green);
+    }
+
+    .device-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+
+    .dtag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    .dtag.os {
+      color: var(--green);
+      background: rgba(78, 201, 148, 0.08);
+      border: 1px solid rgba(78, 201, 148, 0.15);
+    }
+
+    .dtag.gpu {
+      color: #e67e22;
+      background: rgba(230, 126, 34, 0.08);
+      border: 1px solid rgba(230, 126, 34, 0.15);
+    }
+
+    .dtag.primary {
+      color: #3498db;
+      background: rgba(52, 152, 219, 0.08);
+      border: 1px solid rgba(52, 152, 219, 0.15);
+    }
+
+    .dtag.daily {
+      color: #9b59b6;
+      background: rgba(155, 89, 182, 0.08);
+      border: 1px solid rgba(155, 89, 182, 0.15);
+    }
+
+    .device-divider {
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin: 0.8rem 0;
+    }
+
+    /* ── STATUS INDICATOR ── */
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .status-dot.active {
+      background: var(--green);
+      box-shadow: 0 0 6px rgba(78, 201, 148, 0.4);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .status-dot.idle {
+      background: var(--fg-dim);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .device-status {
+      display: flex;
+      align-items: center;
+      font-size: 11px;
+      color: var(--fg-dim);
+      margin-top: 0.8rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .device-specs {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      font-size: 12px;
+      color: #3a3a3a;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    footer a {
+      color: #555;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    footer a:hover {
+      color: var(--fg-dim);
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html" class="nav-brand"><span class="prefix">~&gt;</span> sunnybharti<span class="cursor"></span></a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="devices.html">Devices</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://github.com/sunnybharti072006" target="_blank">GitHub</a></li>
+      <li><a href="https://leetcode.com/u/sunnykumar_07/" target="_blank">LeetCode</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+    <h1><span class="prefix">~&gt;</span> lsusb --devices</h1>
+    <p class="subtitle">The machines I use daily to build, break, and ship code.</p>
+
+    <!-- ── DEVICE 1: Acer Aspire 7 ── -->
+    <div class="device-card" id="device-acer">
+      <div class="device-header">
+        <div class="device-icon laptop">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.623h11.377V24H0zm12.623 0H24V24H12.623z"/></svg>
+        </div>
+        <div>
+          <div class="device-name">Acer Aspire 7</div>
+          <div class="device-type">Primary Laptop</div>
+        </div>
+      </div>
+      <hr class="device-divider">
+      <div class="device-specs">
+        <div class="spec">
+          <span class="spec-label">cpu</span>
+          <span class="spec-value highlight">i5-1250H</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">gpu</span>
+          <span class="spec-value highlight">RTX 3050</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">ram</span>
+          <span class="spec-value">16GB DDR4 3200MHz</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">display</span>
+          <span class="spec-value">144Hz</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">storage</span>
+          <span class="spec-value">512GB NVMe</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">os</span>
+          <span class="spec-value">Windows 11</span>
+        </div>
+      </div>
+      <div class="device-tags">
+        <span class="dtag os">Windows 11</span>
+        <span class="dtag gpu">RTX 3050</span>
+        <span class="dtag primary">Main Machine</span>
+      </div>
+      <div class="device-status">
+        <span class="status-dot active"></span>
+        currently active
+      </div>
+    </div>
+
+    <!-- ── DEVICE 2: Ubuntu Machine ── -->
+    <div class="device-card" id="device-ubuntu">
+      <div class="device-header">
+        <div class="device-icon desktop">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.61.455a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41zM12.92.8C8.923.777 5.137 2.941 3.148 6.451a4.5 4.5 0 0 1 .26-.007 4.92 4.92 0 0 1 2.585.737A8.316 8.316 0 0 1 12.688 3.6 4.944 4.944 0 0 1 13.723.834 11.008 11.008 0 0 0 12.92.8zm9.226 4.994a4.915 4.915 0 0 1-1.918 2.246 8.36 8.36 0 0 1-.273 8.303 4.89 4.89 0 0 1 1.632 2.54 11.156 11.156 0 0 0 .559-13.089zM3.41 7.932A3.41 3.41 0 0 0 0 11.342a3.41 3.41 0 0 0 3.41 3.409 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41zm2.027 7.866a4.908 4.908 0 0 1-2.915.358 11.1 11.1 0 0 0 7.991 6.698 11.234 11.234 0 0 0 2.422.249 4.879 4.879 0 0 1-.999-2.85 8.484 8.484 0 0 1-.836-.136 8.304 8.304 0 0 1-5.663-4.32zm11.405.928a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41z"/></svg>
+        </div>
+        <div>
+          <div class="device-name">Ubuntu Dev Machine</div>
+          <div class="device-type">Secondary PC</div>
+        </div>
+      </div>
+      <hr class="device-divider">
+      <div class="device-specs">
+        <div class="spec">
+          <span class="spec-label">cpu</span>
+          <span class="spec-value highlight">i3-4005U</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">gpu</span>
+          <span class="spec-value">Integrated</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">ram</span>
+          <span class="spec-value">8GB DDR3</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">storage</span>
+          <span class="spec-value">512GB SSD SATA</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">os</span>
+          <span class="spec-value">Ubuntu Linux</span>
+        </div>
+      </div>
+      <div class="device-tags">
+        <span class="dtag os">Ubuntu</span>
+        <span class="dtag daily">Linux Dev</span>
+      </div>
+      <div class="device-status">
+        <span class="status-dot idle"></span>
+        idle
+      </div>
+    </div>
+
+    <!-- ── DEVICE 3: Redmi Note 10 ── -->
+    <div class="device-card" id="device-redmi">
+      <div class="device-header">
+        <div class="device-icon phone">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.532 15.106a1.003 1.003 0 1 1 .001-2.007 1.003 1.003 0 0 1 0 2.007zm-11.044 0a1.003 1.003 0 1 1 .001-2.007 1.003 1.003 0 0 1 0 2.007zm11.4-6.018 2.006-3.459a.413.413 0 1 0-.72-.407l-2.03 3.5A12.26 12.26 0 0 0 12.001 7.74a12.26 12.26 0 0 0-5.143.982l-2.03-3.5a.413.413 0 1 0-.72.407l2.006 3.46C2.678 11.21.287 14.756 0 18.862h24c-.287-4.106-2.678-7.652-6.112-9.774z"/></svg>
+        </div>
+        <div>
+          <div class="device-name">Redmi Note 10</div>
+          <div class="device-type">Primary Phone · sunny</div>
+        </div>
+      </div>
+      <hr class="device-divider">
+      <div class="device-specs">
+        <div class="spec">
+          <span class="spec-label">storage</span>
+          <span class="spec-value">4GB / 64GB</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">color</span>
+          <span class="spec-value" style="color: #2ecc71;">🟢 Green</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">os</span>
+          <span class="spec-value">Android / MIUI</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">user</span>
+          <span class="spec-value highlight">sunny</span>
+        </div>
+      </div>
+      <div class="device-tags">
+        <span class="dtag os">Android</span>
+        <span class="dtag primary">Daily Driver</span>
+      </div>
+      <div class="device-status">
+        <span class="status-dot active"></span>
+        daily driver
+      </div>
+    </div>
+
+    <!-- ── DEVICE 4: Realme C2 ── -->
+    <div class="device-card" id="device-realme">
+      <div class="device-header">
+        <div class="device-icon phone-alt">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.532 15.106a1.003 1.003 0 1 1 .001-2.007 1.003 1.003 0 0 1 0 2.007zm-11.044 0a1.003 1.003 0 1 1 .001-2.007 1.003 1.003 0 0 1 0 2.007zm11.4-6.018 2.006-3.459a.413.413 0 1 0-.72-.407l-2.03 3.5A12.26 12.26 0 0 0 12.001 7.74a12.26 12.26 0 0 0-5.143.982l-2.03-3.5a.413.413 0 1 0-.72.407l2.006 3.46C2.678 11.21.287 14.756 0 18.862h24c-.287-4.106-2.678-7.652-6.112-9.774z"/></svg>
+        </div>
+        <div>
+          <div class="device-name">Realme C2</div>
+          <div class="device-type">Secondary Phone</div>
+        </div>
+      </div>
+      <hr class="device-divider">
+      <div class="device-specs">
+        <div class="spec">
+          <span class="spec-label">type</span>
+          <span class="spec-value">Budget Smartphone</span>
+        </div>
+        <div class="spec">
+          <span class="spec-label">os</span>
+          <span class="spec-value">Android</span>
+        </div>
+      </div>
+      <div class="device-tags">
+        <span class="dtag os">Android</span>
+        <span class="dtag daily">Backup</span>
+      </div>
+      <div class="device-status">
+        <span class="status-dot idle"></span>
+        backup device
+      </div>
+    </div>
+
+    <footer>
+      © 2025 &bull; <a href="index.html">Sunny Bharti</a> &bull; Inspired by <a href="https://cyberknight777.dev"
+        target="_blank">cyberknight777</a>
+    </footer>
+  </div>
+</body>
+
+</html>
