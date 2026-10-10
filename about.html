@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>~&gt; whoami :: Sunny Bharti</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --fg: #d4d4d4;
+      --fg-dim: #6b6b6b;
+      --border: #1e1e1e;
+      --green: #a8a8a8;
+      --link: #7a7a7a;
+      --glass-bg: rgba(255, 255, 255, 0.045);
+      --glass-border: rgba(255, 255, 255, 0.10);
+      --glass-hi: rgba(255, 255, 255, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      line-height: 1.75;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* soft glowing blobs behind the glass so the blur is actually visible */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    body::before {
+      width: 420px;
+      height: 420px;
+      top: -120px;
+      left: -100px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    body::after {
+      width: 480px;
+      height: 480px;
+      bottom: -160px;
+      right: -120px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* ── GLASS ── */
+    .glass {
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      backdrop-filter: blur(16px) saturate(140%);
+      border: 1px solid var(--glass-border);
+      border-top-color: var(--glass-hi);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    /* ── NAV ── */
+    nav {
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      padding: 0.8rem 1.2rem;
+      position: sticky;
+      top: 0.8rem;
+      z-index: 10;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem 1.4rem;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: var(--fg-dim);
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--fg);
+      text-decoration: underline;
+    }
+
+    .nav-brand {
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .nav-brand:hover {
+      color: var(--green);
+    }
+
+    .nav-brand .prefix {
+      color: var(--green);
+    }
+
+    .nav-brand .cursor {
+      display: inline-block;
+      width: 7px;
+      height: 14px;
+      background: #d4d4d4;
+      margin-left: 1px;
+      vertical-align: text-bottom;
+      animation: cursor-blink 1s step-end infinite;
+    }
+
+    @keyframes cursor-blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--fg);
+      margin-bottom: 0.4rem;
+    }
+
+    h1 .prefix,
+    h2 .prefix {
+      color: var(--green);
+    }
+
+    .tagline {
+      color: var(--fg-dim);
+      margin-bottom: 1.8rem;
+      font-size: 13px;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--fg);
+      margin: 2.4rem 0 1rem;
+    }
+
+    h3 {
+      font-size: 14px;
+      color: var(--fg);
+      margin-bottom: 0.1rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--fg);
+      font-size: 14px;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: var(--fg);
+    }
+
+    strong {
+      color: var(--fg);
+      font-weight: bold;
+    }
+
+    code {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--glass-border);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 13px;
+      color: var(--fg-dim);
+    }
+
+    em {
+      font-style: italic;
+      color: var(--fg-dim);
+    }
+
+    ul.plain {
+      margin: 0.6rem 0 0 1.2rem;
+      list-style: disc;
+    }
+
+    ul.plain li {
+      margin-bottom: 0.5rem;
+      font-size: 13.5px;
+      color: var(--fg);
+    }
+
+    /* ── CARDS ── */
+    .card {
+      padding: 1.1rem 1.3rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.30);
+      transform: translateY(-2px);
+    }
+
+    .card .stack {
+      font-size: 12px;
+      color: var(--green);
+      margin-bottom: 0.4rem;
+    }
+
+    .card .meta {
+      font-size: 12px;
+      color: var(--fg-dim);
+    }
+
+    /* skills */
+    .skill-row {
+      display: flex;
+      gap: 0.8rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+    }
+
+    .skill-row:last-child {
+      border-bottom: none;
+    }
+
+    .skill-row .k {
+      flex: 0 0 90px;
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .skill-row .v {
+      color: var(--fg);
+      font-size: 13.5px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      font-size: 12px;
+      color: #4a4a4a;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    footer a {
+      color: #666;
+    }
+
+    footer a:hover {
+      color: var(--fg-dim);
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 1rem 0.8rem;
+      }
+
+      .skill-row {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .skill-row .k {
+        flex: none;
+      }
+    }
+
+    /* fallback if backdrop-filter isn't supported */
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .glass {
+        background: rgba(30, 30, 30, 0.92);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="glass">
+    <ul>
+      <li><a href="index.html" class="nav-brand"><span class="prefix">~&gt;</span> sunnybharti<span
+            class="cursor"></span></a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="devices.html">Devices</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://github.com/sunnybharti072006" target="_blank">GitHub</a></li>
+      <li><a href="https://leetcode.com/u/sunnykumar_07/" target="_blank">LeetCode</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <h1><span class="prefix">~&gt;</span> whoami</h1>
+    <p class="tagline">Backend &amp; Android Developer | Java • Spring Boot • Kotlin • Jetpack Compose</p>
+
+    <div class="glass card">
+      <p>
+        I'm Sunny Kumar Bharti, a <strong>Backend &amp; Android Developer</strong> from Gurugram.
+        You may know me as <strong>sunnybharti072006</strong> on most platforms.
+      </p>
+      <p style="margin-bottom:0">
+        I work with <strong>Java, Spring Boot, REST APIs and Spring Security</strong>, and I also build
+        Android apps with <strong>Kotlin and Jetpack Compose</strong>. My focus is on building scalable,
+        secure and reliable software systems, and I learn best by building projects and figuring out how
+        things work instead of just following tutorials.
+      </p>
+    </div>
+
+    <!-- ── SKILLS ── -->
+    <h2><span class="prefix">~&gt;</span> skills</h2>
+
+    <div class="glass card">
+      <div class="skill-row"><span class="k">Languages</span><span class="v">Java, Kotlin, SQL</span></div>
+      <div class="skill-row"><span class="k">Backend</span><span class="v">Spring Boot, Spring Security, REST APIs, JWT, FastAPI</span></div>
+      <div class="skill-row"><span class="k">Android</span><span class="v">Jetpack Compose, Android SDK</span></div>
+      <div class="skill-row"><span class="k">Databases</span><span class="v">MySQL, PostgreSQL</span></div>
+      <div class="skill-row"><span class="k">Tools</span><span class="v">Git, Docker, Postman, IntelliJ IDEA, Android Studio, VS Code</span></div>
+      <div class="skill-row"><span class="k">Core</span><span class="v">Data Structures &amp; Algorithms, OOP, DBMS, Operating Systems, Computer Network</span></div>
+    </div>
+
+    <!-- ── EDUCATION ── -->
+    <h2><span class="prefix">~&gt;</span> education</h2>
+
+    <div class="glass card">
+      <h3>B.Tech — Computer Science &amp; Engineering</h3>
+      <div class="meta">2024–2028 · Pursuing</div>
+      <p style="margin:0.3rem 0 0.9rem">
+        St. Andrews Institute of Technology and Management, Gurugram (affiliated with MDU Rohtak)
+      </p>
+      <h3>Class XII — PCM with Computer Science</h3>
+      <div class="meta">2023–2024 · 75.2%</div>
+      <p style="margin:0.3rem 0 0">Govt. Model Senior Secondary School 4/7, Gurugram</p>
+    </div>
+
+    <!-- ── ACHIEVEMENTS ── -->
+    <h2><span class="prefix">~&gt;</span> achievements</h2>
+
+    <div class="glass card">
+      <ul class="plain" style="margin-top:0">
+        <li>Solved <strong>58/150</strong> problems on the NeetCode 150 roadmap: Arrays, Trees, Stacks, Greedy and Searching.</li>
+        <li>Backend and Android projects built with Java, Spring Boot, Kotlin and Jetpack Compose.</li>
+      </ul>
+    </div>
+
+    <!-- ── CONTACT ── -->
+    <h2><span class="prefix">~&gt;</span> contact</h2>
+
+    <div class="glass card">
+      <p style="margin-bottom:0">
+        Reach me via <a href="mailto:sunnybharti3.142@gmail.com">email</a>,
+        <a href="https://www.linkedin.com/in/sunny-kumar-69316b330" target="_blank">LinkedIn</a> or
+        <a href="https://github.com/sunnybharti072006" target="_blank">GitHub</a>.
+      </p>
+    </div>
+
+    <footer>
+      © 2026 &bull; <a href="index.html">Sunny Bharti</a> &bull; Inspired by
+      <a href="https://cyberknight777.dev" target="_blank">cyberknight777</a>
+    </footer>
+
+  </div>
+
+</body>
+
+</html>
